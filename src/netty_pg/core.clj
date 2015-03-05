@@ -1,9 +1,12 @@
 (ns netty-pg.core
   (:gen-class)
   (:require [netty-pg.discard-server :as discard-server]
-            [netty-pg.echo-server :as echo-server]))
+            [netty-pg.echo-server :as echo-server]
+            [netty-pg.time-server :as time-server]))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Run the server"
   [& args]
-  (echo-server/run 8080))
+  (let [port (or (first args) 8080)]
+    (println "Server running on port" port)
+    (time-server/run (Integer/parseInt port))))
